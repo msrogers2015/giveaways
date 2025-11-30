@@ -1,0 +1,32 @@
+@import '../App';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.stem-banner {
+  min-height: 200px;
+  background-image: url('../images/stemBanner.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: $stem-banner-bg;
+  @include media-breakpoint-up(md) {
+   min-height: 250px;
+  }
+  @include media-breakpoint-up(lg) {
+    min-height: 350px;
+  }
+}
+
+.stem-banner-bg {
+  background-color: $stem-banner-bg;
+}
+
+.card-image {
+  width: 250px;
+  height: 250px;
+}
+
+.icon-xl {
+  font-size: 60px;
+}
