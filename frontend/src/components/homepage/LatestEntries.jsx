@@ -1,10 +1,20 @@
 import InfoCard from '../templates/InfoCard';
-import { giveaways } from "../../data/runningGiveaways";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useEffect, useState } from "react";
+import api from '../../utility/axiosAPI'
+import axios from 'axios'
 
 function LatestEntries() {
+  const [giveaways, setGiveaways] = useState([])
+
+    useEffect(() => {
+    axios.get('http://192.168.1.27:8000/giveaway/all')
+      .then(res => {
+        setGiveaways(res.data)
+      })
+  }, []);
 
   return (
     <Container>
