@@ -10,7 +10,7 @@ function InfoCard({ name, totalWinners, endDate, subject, form }) {
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" className="card-image" src={`/images/${subject}.png`} />
+      <Card.Img variant="top" className="card-image p-2" src={`/images/${subject}.png`} />
       <Card.Text><i>{attrList[subject]}</i></Card.Text>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
