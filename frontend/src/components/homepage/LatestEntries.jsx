@@ -9,8 +9,9 @@ import axios from 'axios'
 function LatestEntries() {
   const [giveaways, setGiveaways] = useState([])
 
-    useEffect(() => {
-    axios.get('http://192.168.1.27:8000/giveaway/all')
+
+  useEffect(() => {
+    api.get('/giveaway/all')
       .then(res => {
         setGiveaways(res.data)
       })
@@ -30,7 +31,7 @@ function LatestEntries() {
               totalWinners={giveaway.totalWinners}
               endDate={giveaway.endDate}
               subject={giveaway.subject}
-              form={giveaway.formLink}
+              form={giveaway.id}
             />
           </Col>
         ))}

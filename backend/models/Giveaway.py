@@ -1,5 +1,6 @@
 from sqlalchemy import Column, BigInteger, String, Integer, DateTime, Boolean
 from .BaseModel import BaseModel
+from sqlalchemy.dialects.postgresql import JSONB
 
 
 class Giveaway(BaseModel):
@@ -14,3 +15,4 @@ class Giveaway(BaseModel):
     created_at = Column(DateTime(timezone=True), nullable=False)
     redeem_link = Column(String(150), nullable=True)
     redeem_platform = Column(String(50), nullable=True)
+    details = Column(JSONB, nullable=False)
