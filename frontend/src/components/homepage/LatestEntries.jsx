@@ -3,46 +3,47 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useEffect, useState } from "react";
-import api from '../../utility/axiosAPI'
-import axios from 'axios'
+import api from '../../utility/axiosAPI';
 
 function LatestEntries() {
   const [giveaways, setGiveaways] = useState([])
-
+  const [totalGiveaways, setTotalGiveaways] = useState(0)
 
   useEffect(() => {
-    api.get('/giveaway/all')
+    api.get('/giveaway/active')
       .then(res => {
         setGiveaways(res.data)
+        setTotalGiveaways(res.data.length)
       })
   }, []);
 
   return (
     <Container>
-      <Row className='text-center mb-4'>
+      <Row className='text-center my-4'>
         <h1>Current Giveaways</h1>
       </Row>
       <Row className='text-center justify-content-evenly my-5'>
         {/* Display first 3 giveaways */}
         {giveaways.slice(0,3).map((giveaway) => (
-          <Col key={giveaway.id} xs='auto'>
+          <Col key={giveaway.id} xs='auto' className='mb-4'>
             <InfoCard
               name={giveaway.name}
               totalWinners={giveaway.totalWinners}
               endDate={giveaway.endDate}
               subject={giveaway.subject}
               form={giveaway.id}
+              totalGiveaways={totalGiveaways}
             />
           </Col>
         ))}
         {/* Display More card if there's more than 3 active giveaways*/}
         {giveaways.length > 3 &&
-          <Col>
+          <Col xs='auto'>
             <InfoCard
-              name={"View More"}
+              name={"See More Giveaways"}
               totalWinners={" "}
               endDate={" "}
-              subject={""}
+              subject={"programming"}
               form={""}
             />
           </Col>

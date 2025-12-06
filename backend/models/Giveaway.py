@@ -16,3 +16,5 @@ class Giveaway(BaseModel):
     redeem_link = Column(String(150), nullable=True)
     redeem_platform = Column(String(50), nullable=True)
     details = Column(JSONB, nullable=False)
+    mrsp = Column(Integer, nullable=False)
+    winners = Column(JSONB, nullable=True)
