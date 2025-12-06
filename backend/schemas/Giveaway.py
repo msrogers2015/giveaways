@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 class GiveawaySchema(BaseModel):
     id: int
@@ -9,3 +9,5 @@ class GiveawaySchema(BaseModel):
     total_winners: int
     end_date: datetime
     details: List[Dict[str, Any]]
+    mrsp: int
+    winners: Optional[List[Dict[str, Any]]] = None

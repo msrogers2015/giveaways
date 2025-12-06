@@ -1,5 +1,32 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons';
+@import 'bootstrap/scss/mixins';
 
 // Variables
 $stem-banner-bg: #89D0EF;
+
+.btn-outline-primary {
+  border-color: $stem-banner-bg !important;
+  color: black !important;
+  &:hover {
+    background-color: $stem-banner-bg !important;
+    border-color: $stem-banner-bg !important;
+  }
+}
+
+.btn-primary {
+  border-color: $stem-banner-bg !important;
+  background-color: $stem-banner-bg !important;
+  color: black !important;
+  &:disabled {
+    background-color: gray !important;
+    border-color: gray !important;
+  }
+}
+
+.footer-height {
+  height: 8vh;
+  @include media-breakpoint-down(md) {
+    height: 20vh;
+  }
+}
