@@ -1,0 +1,57 @@
+// src/components/Hero.scss
+
+
+.hero-section {
+  display: flex;
+  height:100%;
+  align-items: center;
+}
+
+.min-vh {
+  min-height: 20vh;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.hero-buttons {
+  .btn {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.hero-image-placeholder {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 3rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .placeholder-content {
+    font-size: 2rem;
+  }
+}

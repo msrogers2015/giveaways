@@ -1,19 +1,30 @@
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import './Homepage.scss';
 import LatestEntries from '../components/homepage/LatestEntries'
-import {givewayStats} from "../data/runningGiveaways";
+import api from "../utility/axiosAPI"
 
 function Homepage() {
+  const [giveawayMetrics, setGiveawayMetrics] = useState({completed_giveaways: "", total_winners: ""})
+
+  useLayoutEffect(() => {
+    document.title = "Homepage"
+  }, []);
+
+  useEffect(() => {
+    api.get('giveaway/metrics')
+      .then(res => {
+        setGiveawayMetrics(res.data)
+      })
+  }, []);
 
   return (
     <>
-      {/* Banner Image at the top of the page*/}
-      <div className='stem-banner'></div>
       {/* Winner Overall general stats */}
       <div className='container-fluid stem-banner-bg'>
-        <div className="container mb-5">
+        <div className="container">
           <div className="row text-center">
-            <div className="col-12 col-md-6"><h1>{givewayStats.completed}</h1><br /><h5>Giveaways Completed</h5></div>
-            <div className="col-12 col-md-6"><h1>{givewayStats.winners}</h1><br /><h5>Winners and counting</h5></div>
+            <div className="col-12 col-md-6"><h1>{giveawayMetrics.completed_giveaways}</h1><br /><h5>Giveaways Completed</h5></div>
+            <div className="col-12 col-md-6"><h1>{giveawayMetrics.total_winners}</h1><br /><h5>Winners and counting</h5></div>
           </div>
         </div>
       </div>
