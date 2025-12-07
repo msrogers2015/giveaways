@@ -15,6 +15,7 @@ entry = EntryCrud()
 async def all_giveaways(db: Session = Depends(get_db)):
     return giveaway.get_all(db)
 
+
 @giveaways.get('/id/{g_id}', response_model=GiveawaySchema)
 async def giveaway_by_id(g_id: int, db: Session = Depends(get_db)):
     result = giveaway.get_by_id(id=g_id, db=db)
@@ -30,11 +31,11 @@ async def active_giveaways(db: Session = Depends(get_db)):
     return results
 
 @giveaways.post('/entry/{g_id}')
-async def enter_giveaway(g_id: int, email: str, state: str, db: Session = Depends(get_db)):
+async def enter_giveaway(g_id: int, email: str, first_name: str, state: str, db: Session = Depends(get_db)):
     results = entry.get_filtered(db=db, filters={'giveaway_id': g_id, 'email': email})
     if results:
         raise HTTPException(status_code=400, detail='You are already entered into this giveaway.')
-    entry.create_record(db=db, data={'giveaway_id': g_id, 'email': email, 'state': state, "winner": False})
+    entry.create_record(db=db, data={'giveaway_id': g_id, 'email': email, 'state': state, "winner": False, "first_name": first_name})
 
 @giveaways.get('/metrics')
 async def giveaway_metrics(db: Session = Depends(get_db)):

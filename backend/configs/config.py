@@ -1,8 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-ENV = os.getenv('ENV', "development")
-print(f"Running in {ENV=} mode")
+ENV = os.getenv("ENV", "development")
 
 if ENV == 'production':
     load_dotenv(".env.production")

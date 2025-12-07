@@ -54,7 +54,7 @@ function Giveaway() {
     if (form.checkValidity() === false) {
       event.stopPropagation()
     } else {
-      api.post(`/giveaway/entry/${id}?email=${entryEmail}&name=${entryName}&state=${entryState}`)
+      api.post(`/giveaway/entry/${id}?email=${entryEmail}&first_name=${entryName}&state=${entryState}`)
         .then(res => {
           alert(`You have entered the ${giveawayData.name} giveaway!`)
         })
