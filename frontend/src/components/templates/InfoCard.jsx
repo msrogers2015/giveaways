@@ -13,7 +13,7 @@ function InfoCard({ name, totalWinners, endDate, subject, form, totalGiveaways }
   return (
     <Card style={{ width: '18rem', height: '450px' }}>
       {subject !== "" &&
-        <Card.Img variant="top" className="card-image p-2" src={`/images/${subject}.png`} />
+        <Card.Img variant="top" className="card-image p-2" src={`/images/${subject.toLocaleLowerCase()}.png`} />
       }
       <Card.Text><i>{attrList[subject]}</i></Card.Text>
       <Card.Body>

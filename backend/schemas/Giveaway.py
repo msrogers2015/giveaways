@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date
 from typing import List, Dict, Any, Optional
 
 class GiveawaySchema(BaseModel):
@@ -7,7 +7,7 @@ class GiveawaySchema(BaseModel):
     name: str
     subject: str
     total_winners: int
-    end_date: datetime
+    end_date: date
     details: List[Dict[str, Any]]
     mrsp: int
     winners: Optional[List[Dict[str, Any]]] = None

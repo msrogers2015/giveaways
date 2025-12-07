@@ -15,6 +15,9 @@ function LatestEntries() {
         setGiveaways(res.data)
         setTotalGiveaways(res.data.length)
       })
+      .catch(err => {
+        console.log(err.response.data.detail)
+      })
   }, []);
 
   return (

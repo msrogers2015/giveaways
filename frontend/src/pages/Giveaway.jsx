@@ -20,16 +20,30 @@ function Giveaway() {
   const [entryState, setEntryState] = useState("")
   const [acceptTerms, setAcceptTerms] = useState(false)
   const [moreGiveaways, setMoreGiveaways] = useState(true)
+  const [notFound, setNotFound] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useLayoutEffect(() => {
     document.title = giveawayData.name || "Enter Giveaway"
   }, [giveawayData]);
 
   useEffect(() => {
-    setMoreGiveaways(loc.state.giveawayCount >= 4)
+    try {
+      setMoreGiveaways(loc.state.giveawayCount >= 4)
+    } catch {
+      setMoreGiveaways(1)
+    }
     api.get(`/giveaway/id/${id}`)
       .then(res => {
         setGiveawayData(res.data)
+        setNotFound(false)
+        setLoading(false)
+      })
+      .catch(err => {
+        if (err.response.status === 404){
+          setNotFound(true)
+        }
+        setLoading(false)
       })
   }, []);
 
@@ -40,7 +54,7 @@ function Giveaway() {
     if (form.checkValidity() === false) {
       event.stopPropagation()
     } else {
-      api.post(`/giveaway/entry/${id}?email=${entryEmail}&name=${entryName}&state=${entryState}`)
+      api.post(`/giveaway/entry/${id}?email=${entryEmail}&first_name=${entryName}&state=${entryState}`)
         .then(res => {
           alert(`You have entered the ${giveawayData.name} giveaway!`)
         })
@@ -66,6 +80,24 @@ function Giveaway() {
         </>
       )
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="container text-center mt-5">
+        <h3>Loading...</h3>
+      </div>
+    )
+  }
+
+  if (notFound) {
+    return (
+      <div className="container text-center my-5">
+        <h1>Giveaway Not Found</h1>
+        <p className="mt-3">Sorry, the giveaway you're looking for doesn't exist or has been removed.</p>
+        <Link to="/" className="btn btn-primary mt-3">Return to Homepage</Link>
+      </div>
+    )
   }
 
 
