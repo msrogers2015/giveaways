@@ -15,6 +15,11 @@ function LatestEntries() {
         setGiveaways(res.data)
         setTotalGiveaways(res.data.length)
       })
+      .catch(err => {
+        if (err.response.status === 404) {
+          console.log('No Active Giveaways')
+        }
+      })
   }, []);
 
   return (
