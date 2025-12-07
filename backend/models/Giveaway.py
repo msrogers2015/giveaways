@@ -1,4 +1,4 @@
-from sqlalchemy import Column, BigInteger, String, Integer, DateTime, Boolean
+from sqlalchemy import Column, BigInteger, String, Integer, Boolean, DateTime, Date
 from .BaseModel import BaseModel
 from sqlalchemy.dialects.postgresql import JSONB
 
@@ -10,7 +10,7 @@ class Giveaway(BaseModel):
     name = Column(String(100), nullable=False)
     subject = Column(String(20), nullable=False)
     total_winners = Column(Integer, nullable=False)
-    end_date = Column(DateTime(timezone=True), nullable=False)
+    end_date = Column(Date, nullable=False)
     is_active = Column(Boolean, nullable=False)
     created_at = Column(DateTime(timezone=True), nullable=False)
     redeem_link = Column(String(150), nullable=True)
