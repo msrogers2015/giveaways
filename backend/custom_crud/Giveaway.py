@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from configs.crud import CRUDBase
 from models.Giveaway import Giveaway
+from datetime import date
 
 
 class GiveawayCrud(CRUDBase):
@@ -10,7 +11,7 @@ class GiveawayCrud(CRUDBase):
         super().__init__(Giveaway)
 
     def get_active(self, db: Session):
-        return db.query(self.model).filter(self.model.is_active == True).all()
+        return db.query(self.model).filter(self.model.is_active == True, self.model.end_date >= date.today()).all()
 
     def total_giveaways(self, db: Session):
         return db.query(self.model).filter(self.model.winners.isnot(None)).count()

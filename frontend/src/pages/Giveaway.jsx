@@ -22,6 +22,7 @@ function Giveaway() {
   const [moreGiveaways, setMoreGiveaways] = useState(true)
   const [notFound, setNotFound] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [totalEntries, setTotalEntries] = useState(null)
 
   useLayoutEffect(() => {
     document.title = giveawayData.name || "Enter Giveaway"
@@ -35,9 +36,13 @@ function Giveaway() {
     }
     api.get(`/giveaway/id/${id}`)
       .then(res => {
-        setGiveawayData(res.data)
+        setGiveawayData(res.data.giveaway)
         setNotFound(false)
         setLoading(false)
+        setTotalEntries(res.data.entries)
+        if (res.data.count > 3) {
+          setMoreGiveaways(true)
+        }
       })
       .catch(err => {
         if (err.response.status === 404){
@@ -185,9 +190,12 @@ function Giveaway() {
       <div className="container-fluid stem-banner-bg pt-5">
         <div className="container">
           <div className="row text-center">
-            <div className="col"><h3>Retail Value</h3><br/><h5>${giveawayData.mrsp}.00</h5></div>
-            <div className="col"><h3>End Date</h3><br/><h5>{giveawayData.end_date !== undefined && new Date(giveawayData.end_date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</h5></div>
-            <div className="col"><h3>Total Winners</h3><br/><h5>{giveawayData.total_winners}</h5></div>
+            <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>Retail Value</b></h2><br/><h5>${giveawayData.mrsp}.00</h5></div>
+            <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>End Date</b></h2><br/><h5>{giveawayData.end_date !== undefined && new Date(giveawayData.end_date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</h5></div>
+            <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>Total Winners</b></h2><br/><h5>{giveawayData.total_winners}</h5></div>
+            {totalEntries !== 0 &&
+              <div className="col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"><h2><b>Winning Odds</b></h2><br/><h5>1 of {totalEntries}</h5></div>
+            }
           </div>
           <div className="row text-center mt-5 pb-2">
             <div className="col h5"><b>No purchase necessary. Must be 18+ and a US resident to enter.</b></div>

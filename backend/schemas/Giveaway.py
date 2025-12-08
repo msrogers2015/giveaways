@@ -11,3 +11,9 @@ class GiveawaySchema(BaseModel):
     details: List[Dict[str, Any]]
     mrsp: int
     winners: Optional[List[Dict[str, Any]]] = None
+
+
+class GiveawayDetailsSchema(BaseModel):
+    giveaway: GiveawaySchema
+    count: int
+    entries: int
