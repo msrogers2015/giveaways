@@ -194,7 +194,7 @@ function Giveaway() {
             <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>End Date</b></h2><br/><h5>{giveawayData.end_date !== undefined && new Date(giveawayData.end_date).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</h5></div>
             <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>Total Winners</b></h2><br/><h5>{giveawayData.total_winners}</h5></div>
             {totalEntries !== 0 &&
-              <div className="col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"><h2><b>Winning Odds</b></h2><br/><h5>1 of {totalEntries}</h5></div>
+              <div className="col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"><h2><b>Winning Odds</b></h2><br/><h5>1 of {totalEntries+1}</h5></div>
             }
           </div>
           <div className="row text-center mt-5 pb-2">
