@@ -23,7 +23,6 @@ function Giveaway() {
   const [notFound, setNotFound] = useState(false)
   const [loading, setLoading] = useState(true)
   const [totalEntries, setTotalEntries] = useState(null)
-  const  endDate = new Date()
 
   useLayoutEffect(() => {
     document.title = giveawayData.name || "Enter Giveaway"
@@ -41,7 +40,6 @@ function Giveaway() {
         setNotFound(false)
         setLoading(false)
         setTotalEntries(res.data.entries)
-        endDate.setDate(res.data.giveaway.end_date)
         if (res.data.count > 3) {
           setMoreGiveaways(true)
         }
@@ -193,7 +191,16 @@ function Giveaway() {
         <div className="container">
           <div className="row text-center">
             <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>Retail Value</b></h2><br/><h5>${giveawayData.mrsp}.00</h5></div>
-            <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>End Date</b></h2><br/><h5>{giveawayData.end_date !== undefined && endDate.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'})}</h5></div>
+            <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}>
+              <h2>
+                <b>End Date</b>
+              </h2><br/>
+              <h5>{giveawayData.end_date !== undefined && (() => {
+                const date = new Date(giveawayData.end_date);
+                date.setDate(date.getDate() + 1);
+                return date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric'});
+              })()}</h5>
+            </div>
             <div className={totalEntries === 0 ? "col-12 col-md-4 mb-md-0 mb-5" : "col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"}><h2><b>Total Winners</b></h2><br/><h5>{giveawayData.total_winners}</h5></div>
             {totalEntries !== 0 &&
               <div className="col-12 col-sm-6 col-md-3 mb-sm-0 mb-5"><h2><b>Winning Odds</b></h2><br/><h5>1 of {totalEntries+1}</h5></div>
